@@ -10,12 +10,12 @@ ativo = "True"
 nome = nome.title()
 idade = int(idade)
 salario = float(salario)
-ativo = ativo == "True"
+ativo = ativo.lower() == "true"
 
 # 03 - Exibindo as informações formatadas
-print("\n")
+print()
 print("===== Informações Pessoais =====")
 print(f"Nome: {nome}\n"
       f"Idade: {idade} anos\n"
-      f"Salário: R$ {salario:.2f}\n"
+      f"Salário: R$ {salario:.2f}".replace(".", ",") + "\n"
       f"Ativo: {ativo}\n")
