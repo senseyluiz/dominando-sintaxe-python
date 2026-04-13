@@ -28,8 +28,8 @@ def calcular_imposto(valor: float, taxa: float = 0.15) -> float:
     Returns:
         float: O valor do imposto calculado.
     """
-    # TODO: Retorne o valor * taxa
-    pass
+    return valor * (1 + taxa)
+    
 
 def calcular_desconto(valor: float, percentual: float) -> float:
     """
