@@ -28,7 +28,7 @@ def calcular_imposto(valor: float, taxa: float = 0.15) -> float:
     Returns:
         float: O valor do imposto calculado.
     """
-    return valor * (1 + taxa)
+    return valor * taxa
     
 
 def calcular_desconto(valor: float, percentual: float) -> float:
@@ -43,7 +43,7 @@ def calcular_desconto(valor: float, percentual: float) -> float:
         float: O novo valor com desconto aplicado.
     """
     return valor - (valor * (percentual / 100))
-    pass
+   
 
 def calcular_salario_liquido(salario_bruto: float) -> dict:
     """
@@ -64,7 +64,16 @@ def calcular_salario_liquido(salario_bruto: float) -> dict:
     # irrf = ...
     # liquido = ...
     # return {...}
-    pass
+    inss = calcular_imposto(salario_bruto, 0.08)
+    irrf = calcular_imposto(salario_bruto, 0.15) if salario_bruto > 2000 else 0
+    liquido = salario_bruto - inss - irrf
+    resumo = {
+        "bruto": float(salario_bruto),
+        "inss": inss,
+        "irrf": irrf,
+        "liquido": liquido
+    }
+    return resumo
 
 # ==========================================
 # BLOCO DE TESTES (NÃO ALTERE ABAIXO)
