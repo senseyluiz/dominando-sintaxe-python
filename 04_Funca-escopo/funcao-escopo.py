@@ -42,7 +42,7 @@ def calcular_desconto(valor: float, percentual: float) -> float:
     Returns:
         float: O novo valor com desconto aplicado.
     """
-    # TODO: Calcule o desconto e subtraia do valor original
+    return valor - (valor * (percentual / 100))
     pass
 
 def calcular_salario_liquido(salario_bruto: float) -> dict:
