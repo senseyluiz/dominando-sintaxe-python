@@ -11,14 +11,41 @@ def mostrar_estoque(estoque):
         print(f"{produto.title()}: Quantidade: {detalhes['quantidade']} - Preco: {formatar_valor_brl(detalhes['preco'])}")
 
 def adicionar_produto(estoque):
-    nome_produto = input("Digite o nome do produto: ").lower()
-    quantidade_produto = int(input("Digite a quantidade do produto: "))
-    preco_produto = float(input("Digite o preco do produto: "))
+    nome_produto = input("Digite o nome do produto: ").strip().lower()
+    while not nome_produto:
+        print("Nome do produto não pode ser vazio. Por favor, digite um nome válido.")
+        nome_produto = input("Digite o nome do produto: ").strip().lower()
+
+    while nome_produto in estoque:
+        print("Produto já existe no estoque. Por favor, digite um nome diferente.")
+        nome_produto = input("Digite o nome do produto: ").strip().lower()
+
+    try:
+        quantidade_produto = int(input("Digite a quantidade do produto: "))
+    except ValueError:
+        print("Quantidade inválida. Por favor, digite um número inteiro.")
+        while True:
+            try:
+                quantidade_produto = int(input("Digite a quantidade do produto: "))
+                break
+            except ValueError:
+                print("Quantidade inválida. Por favor, digite um número inteiro.")
+
+    try:
+        preco_produto = float(input("Digite o preco do produto: "))
+    except ValueError:
+        print("Preço inválido. Por favor, digite um número.")
+        while True:
+            try:
+                preco_produto = float(input("Digite o preco do produto: "))
+                break
+            except ValueError:
+                print("Preço inválido. Por favor, digite um número.")        
     estoque[nome_produto] = {"quantidade": quantidade_produto, "preco": preco_produto}
     print(f"Produto {nome_produto.title()} adicionado ao estoque.")
 
 def vender_produto(estoque):
-    nome_produto = input("Digite o nome do produto a ser vendido: ").lower()
+    nome_produto = input("Digite o nome do produto a ser vendido: ").strip().lower()
     if nome_produto in estoque:
         quantidade_venda = int(input("Digite a quantidade a ser vendida: "))
         if quantidade_venda <= estoque[nome_produto]["quantidade"]:
@@ -32,33 +59,34 @@ def vender_produto(estoque):
 
 def main():
     estoque = {
-        "notbook": {"quantidade": 5, "preco": 1500.00},
+        "notebook": {"quantidade": 5, "preco": 1500.00},
         "mouse": {"quantidade": 20, "preco": 89.90},
         "teclado": {"quantidade": 15, "preco": 150.00},
         "monitor": {"quantidade": 10, "preco": 1200.00}
     }
+    while True:
+        print("\n===== MENU =====")
+        print("1. Ver produtos em estoque")
+        print("2. Adicionar novo produto")
+        print("3. Vender produto")
+        print("4. Sair")
+        print()
 
-    print("\n===== MENU =====")
-    print("1. Ver produtos em estoque")
-    print("2. Adicionar novo produto")
-    print("3. Vender produto")
-    print("4. Sair")
-    print()
-
-    input_usuario = input("Escolha uma opcao: ")
-    if input_usuario =="1":
-        mostrar_estoque(estoque)
-        
-    elif input_usuario == "2":
-        adicionar_produto(estoque)
-        mostrar_estoque(estoque)
-    elif input_usuario == "3":
-        vender_produto(estoque)
-        mostrar_estoque(estoque)
-    elif input_usuario == "4":
-        print("Saindo do programa...")
-    else:
-        print("Opção inválida. Por favor, escolha uma opção válida.")
+        input_usuario = input("Escolha uma opcao: ")
+        if input_usuario =="1":
+            mostrar_estoque(estoque)
+            
+        elif input_usuario == "2":
+            adicionar_produto(estoque)
+            mostrar_estoque(estoque)
+        elif input_usuario == "3":
+            vender_produto(estoque)
+            mostrar_estoque(estoque)
+        elif input_usuario == "4":
+            print("Saindo do programa...")
+            break
+        else:
+            print("Opção inválida. Por favor, escolha uma opção válida.")
 
 
 if __name__ == "__main__":
