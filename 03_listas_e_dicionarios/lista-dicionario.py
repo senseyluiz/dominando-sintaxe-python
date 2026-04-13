@@ -46,6 +46,9 @@ def adicionar_produto(estoque):
 
 def vender_produto(estoque):
     nome_produto = input("Digite o nome do produto a ser vendido: ").strip().lower()
+    while not nome_produto:
+        print("Nome do produto não pode ser vazio. Por favor, digite um nome válido.")
+        nome_produto = input("Digite o nome do produto a ser vendido: ").strip().lower()
     if nome_produto in estoque:
         quantidade_venda = int(input("Digite a quantidade a ser vendida: "))
         if quantidade_venda <= estoque[nome_produto]["quantidade"]:
