@@ -34,11 +34,13 @@ def formatar_telefone(telefone: str) -> str:
     Formata o telefone para o padrão (XX) XXXXX-XXXX.
     Assume que o número tem 11 dígitos (DDD + 9 dígitos).
     Ex: "11998877665" -> "(11) 99887-7665"
-    """
-    # 1. Limpe o telefone (deixe só números)
-    # 2. Use fatiamento de string (slicing) para separar DDD, parte 1 e parte 2
-    # 3. Retorne a string formatada
-    pass
+    """  
+    telefone_limpo = re.sub(r'\D', '', telefone)
+    ddd = telefone_limpo[:2]
+    parte1 = telefone_limpo[2:7]
+    parte2 = telefone_limpo[7:11]
+    telefone_formatado = f"({ddd}) {parte1}-{parte2}"
+    return telefone_formatado
 
 def validar_email(email: str) -> bool:
     """
