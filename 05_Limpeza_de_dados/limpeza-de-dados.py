@@ -50,7 +50,10 @@ def validar_email(email: str) -> bool:
     Ex: "nome@email" -> False
     """
     # Dica: Use o operador 'in' ou regex simples r'^[\w\.-]+@[\w\.-]+\.\w+$'
-    pass
+    if '@' in email and '.' in email.split('@')[-1]:
+        return True
+    return False
+    
 
 def processar_dados(lista_dados: list) -> list:
     """
