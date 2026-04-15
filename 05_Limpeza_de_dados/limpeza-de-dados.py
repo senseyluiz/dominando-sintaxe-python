@@ -51,7 +51,7 @@ def validar_email(email: str) -> bool:
     """    
     if '@' in email and '.' in email.split('@')[-1]:
         return True
-    return "Email inválido"
+    return False
     
 
 def processar_dados(lista_dados: list) -> list:
@@ -62,8 +62,8 @@ def processar_dados(lista_dados: list) -> list:
     
     for registro in lista_dados:        
         novo_nome = limpar_nome(registro['nome'])        
-        if validar_email(registro['email']) == True:
-            novo_email = registro['email'].strip()
+        if validar_email(registro['email']):
+            novo_email = registro['email'].strip().lower()
         else:
             novo_email = "Email Inválido"        
         novo_cpf = limpar_cpf(registro['cpf'])
