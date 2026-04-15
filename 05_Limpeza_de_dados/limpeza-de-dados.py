@@ -48,11 +48,10 @@ def validar_email(email: str) -> bool:
     Regra simples: Deve ter '@' e um '.' depois do '@'.
     Ex: "nome@email.com" -> True
     Ex: "nome@email" -> False
-    """
-    # Dica: Use o operador 'in' ou regex simples r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    """    
     if '@' in email and '.' in email.split('@')[-1]:
         return True
-    return False
+    return "Email inválido"
     
 
 def processar_dados(lista_dados: list) -> list:
@@ -61,18 +60,21 @@ def processar_dados(lista_dados: list) -> list:
     """
     dados_limpos = []
     
-    for registro in lista_dados:
-        # TODO: Chame as funções acima para limpar cada campo
-        # TODO: Crie um novo dicionário com os dados limpos
-        
-        # Exemplo de lógica:
-        # novo_nome = limpar_nome(registro['nome'])
-        # ...
-        
-        # Adicione ao novo_registro
-        # dados_limpos.append(novo_registro)
-        pass
-
+    for registro in lista_dados:        
+        novo_nome = limpar_nome(registro['nome'])        
+        if validar_email(registro['email']) == True:
+            novo_email = registro['email'].strip()
+        else:
+            novo_email = "Email Inválido"        
+        novo_cpf = limpar_cpf(registro['cpf'])
+        novo_telefone = formatar_telefone(registro['telefone'])        
+        novo_registro = {
+            "nome": novo_nome,
+            "email": novo_email,
+            "cpf": novo_cpf,
+            "telefone": novo_telefone
+        }
+        dados_limpos.append(novo_registro)
     return dados_limpos
 
 # ==========================================
