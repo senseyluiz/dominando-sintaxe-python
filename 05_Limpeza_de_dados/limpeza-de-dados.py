@@ -26,9 +26,8 @@ def limpar_cpf(cpf: str) -> str:
     Remove pontuação do CPF, deixando apenas números.
     Ex: "123.456.789-00" -> "12345678900"
     """
-    # Dica: Use re.sub() para substituir tudo que NÃO é dígito por vazio
-    # Padrão Regex para "não dígito": r'\D'
-    pass
+    cpf_limpo = re.sub(r'\D', '', cpf)
+    return cpf_limpo
 
 def formatar_telefone(telefone: str) -> str:
     """
